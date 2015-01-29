@@ -2,7 +2,6 @@
 // LED blink thread, print thread, and idle loop
 #include <FreeRTOS_AVR.h>
 
-
 // Include for Servo
 #include <Servo.h>
 
@@ -23,14 +22,23 @@
 // AD0 high = 0x69
 MPU6050 mpu;
 //MPU6050 mpu(0x69); // <-- use for AD0 high
+
+
+
 #define OUTPUT_READABLE_YAWPITCHROLL
 
+//#define DEBUG_SERIAL
 
 
+// Global variable
+QueueHandle_t Queue_MPU;
+
+Servo HK15;
 
 const uint8_t LED_PIN = 13;
 
 volatile uint32_t count = 0;
+
 
 
 // MPU control/status vars
@@ -90,7 +98,40 @@ static void vLEDFlashTask(void *pvParameters) {
     }
 }
 //------------------------------------------------------------------------------
+
+static void vServoTask(void *pvParameters){
+#define MOYENNE 50
+    int i; // Pour la moyenne
+    uint16_t angle;
+    static uint16_t angle_current;
+    static long avg;
+
+    for(;;){
+
+        //printf("ServoTask - %d",angle);
+        // Wait until new receive
+        if(xQueueReceive(Queue_MPU,&angle,portMAX_DELAY)){
+            while(i<MOYENNE){
+                avg = avg+angle;
+                i ++;
+            }
+
+
+            if(i>=MOYENNE){
+                avg = avg/MOYENNE;
+                //printf("ServoTask - Nouvelle valeur %d",avg);
+                i = 0;
+                angle_current = avg;
+                avg = 0;
+            }
+            HK15.write(180-angle_current);
+        }
+    }
+}
+//------------------------------------------------------------------------------
 static void vPrintTask(void *pvParameters) {
+
+    int angle;
     while (1) {
         // Sleep for one second.
         //vTaskDelay(configTICK_RATE_HZ);
@@ -166,6 +207,7 @@ static void vPrintTask(void *pvParameters) {
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+#ifdef DEBUG_SERIAL
             Serial.print("ypr\t");
             Serial.print(ypr[0] * 180/M_PI);
             Serial.print("\t");
@@ -173,7 +215,9 @@ static void vPrintTask(void *pvParameters) {
             Serial.print("\t");
             Serial.println(ypr[2] * 180/M_PI);
 #endif
-
+#endif
+            angle = map(ypr[1]*180/M_PI,-90,90,0,180);
+            xQueueSendToBack(Queue_MPU,&angle,0);
 #ifdef OUTPUT_READABLE_REALACCEL
             // display real acceleration, adjusted to remove gravity
             mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -270,10 +314,10 @@ void setup() {
 
     // wait for ready
     Serial.println(F("\nSend any character to begin DMP programming and demo: "));
-    while (Serial.available() && Serial.read()); // empty buffer
-    while (!Serial.available());                 // wait for data
-    while (Serial.available() && Serial.read()); // empty buffer again
-
+    /*while (Serial.available() && Serial.read()); // empty buffer
+      while (!Serial.available());                 // wait for data
+      while (Serial.available() && Serial.read()); // empty buffer again
+     */
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
     devStatus = mpu.dmpInitialize();
@@ -314,6 +358,10 @@ void setup() {
 
     // FIN INITIALISATION MPU ====================================
 
+    HK15.attach(12);
+
+    Queue_MPU = xQueueCreate( 10, sizeof( uint16_t ) );
+
     // create blink task
     xTaskCreate(vLEDFlashTask,
             "LED",
@@ -330,6 +378,12 @@ void setup() {
             tskIDLE_PRIORITY + 1,
             NULL);
 
+    xTaskCreate(vServoTask,
+            "SERVO",
+            configMINIMAL_STACK_SIZE + 100,
+            NULL,
+            tskIDLE_PRIORITY + 2,
+            NULL);
     // start FreeRTOS
     vTaskStartScheduler();
 
