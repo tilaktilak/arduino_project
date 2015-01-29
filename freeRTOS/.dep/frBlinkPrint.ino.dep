@@ -1,0 +1,93 @@
+frBlinkPrint.o: frBlinkPrint.ino \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/binary.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/WCharacter.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/WString.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Stream.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Print.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Printable.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/new.h \
+ /usr/share/arduino/hardware/arduino/variants/eightanaloginputs/pins_arduino.h \
+ /usr/share/arduino/hardware/arduino/variants/eightanaloginputs/../standard/pins_arduino.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/FreeRTOS_AVR.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/FreeRTOS.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/projdefs.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/FreeRTOSConfig.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/portable.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/portmacro.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/mpu_wrappers.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/task.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/list.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/queue.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/semphr.h \
+ /usr/share/arduino/libraries/FreeRTOS_AVR/utility/queue.h \
+ /usr/share/arduino/libraries/Servo/Servo.h \
+ /usr/share/arduino/libraries/I2Cdev/I2Cdev.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h \
+ /usr/share/arduino/libraries/Wire/Wire.h \
+ /usr/share/arduino/hardware/arduino/cores/arduino/Stream.h \
+ MPU6050_6Axis_MotionApps20.h \
+ /usr/share/arduino/libraries/MPU6050/helper_3dmath.h MPU6050.h
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/binary.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/WCharacter.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/WString.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Stream.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Print.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Printable.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/new.h:
+
+/usr/share/arduino/hardware/arduino/variants/eightanaloginputs/pins_arduino.h:
+
+/usr/share/arduino/hardware/arduino/variants/eightanaloginputs/../standard/pins_arduino.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/FreeRTOS_AVR.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/FreeRTOS.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/projdefs.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/FreeRTOSConfig.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/portable.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/portmacro.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/mpu_wrappers.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/task.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/list.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/queue.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/semphr.h:
+
+/usr/share/arduino/libraries/FreeRTOS_AVR/utility/queue.h:
+
+/usr/share/arduino/libraries/Servo/Servo.h:
+
+/usr/share/arduino/libraries/I2Cdev/I2Cdev.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h:
+
+/usr/share/arduino/libraries/Wire/Wire.h:
+
+/usr/share/arduino/hardware/arduino/cores/arduino/Stream.h:
+
+MPU6050_6Axis_MotionApps20.h:
+
+/usr/share/arduino/libraries/MPU6050/helper_3dmath.h:
+
+MPU6050.h:
